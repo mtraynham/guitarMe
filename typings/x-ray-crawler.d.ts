@@ -3,21 +3,21 @@
 // Definitions by: Matt Traynham <https://github.com/mtraynham>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-import httpContext = require('http-context');
+import HttpContext = require('http-context');
 
-export = xRayCrawler;
+export = XRayCrawler;
 
-declare function xRayCrawler (driver?: xRayCrawler.Driver): xRayCrawler.Instance;
+declare function XRayCrawler(driver?: XRayCrawler.Driver): XRayCrawler.Instance;
 
-declare namespace xRayCrawler {
+declare namespace XRayCrawler {
     type Callback<T> = (err: Error, obj: T) => void;
-    type Driver = (context: httpContext.Context, callback: Callback<httpContext.Context>) => void;
-    type RequestHook = (request: httpContext.Request) => void;
-    type ResponseHook = (response: httpContext.Response) => void;
+    type Driver = (context: HttpContext.Context, callback: Callback<HttpContext.Context>) => void;
+    type RequestHook = (request: HttpContext.Request) => void;
+    type ResponseHook = (response: HttpContext.Response) => void;
     type RandomDelay = () => number;
 
     interface Instance {
-        (url: string, callback: Callback<httpContext.Context>): void;
+        (url: string, callback: Callback<HttpContext.Context>): void;
         driver(): Driver;
         driver(driver: Driver): this;
         throttle(): number;

@@ -1,16 +1,16 @@
-// Type definitions for http-context 2.0
-// Project: https://github.com/lapwinglabs/http-context
+// Type definitions for http-context 1.1
+// Project: https://github.com/lapwinglabs/http-context#readme
 // Definitions by: Matt Traynham <https://github.com/mtraynham>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 import accepts = require('accepts');
 import http = require('http');
 
-export = httpContext;
+export = HttpContext;
 
-declare function httpContext(): httpContext.Context;
+declare function HttpContext(): HttpContext.Context;
 
-declare namespace httpContext {
+declare namespace HttpContext {
     interface RequestJSON {
         method: string;
         url: string;
@@ -24,7 +24,7 @@ declare namespace httpContext {
         href: string;
         method: string;
         path: string;
-        query: Object;
+        query: {[param: string]: string | string[]};
         querystring: string;
         search: string;
         host: string;

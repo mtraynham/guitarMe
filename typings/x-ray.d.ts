@@ -1,37 +1,50 @@
-// https://github.com/matthewmueller/x-ray
+// Type definitions for x-ray 2.3
+// Project: https://github.com/lapwinglabs/x-ray#readme
+// Definitions by: Matt Traynham <https://github.com/mtraynham>
+// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
+import Bluebird = require('bluebird');
+import XRayCrawler = require('x-ray-crawler');
+import ErrnoException = NodeJS.ErrnoException;
 import ReadStream = NodeJS.ReadStream;
 
 export = XRay;
 
-declare function XRay (options: xRay.XRayOptions): xRay.XRayInstance;
+declare function XRay(options: XRay.Options): XRay.Instance;
 
-declare namespace xRay {
-
-    interface XRayOptions {
-        filters: {};
+declare namespace XRay {
+    type Filter = (value: any, ...args: string[]) => any;
+    interface Options {
+        filters: {[key: string]: Filter};
     }
-    type XRayCallback = (err: Error, data: any) => void;
-    type XRayCallbackInvocation = (callback: XRayCallback) => void;
+    type Callback = (err: Error, data: any) => void;
+    type CallbackInvocation = (callback: Callback) => void;
 
-    interface XRayDriver { }
+    type Selector = string | {[key: string]: string | Instance} | string[] | string[][];
 
-    class XRayCrawler {
-        constructor (driver: XRayDriver);
-        driver (driver: XRayDriver): void;
-    }
-
-    interface XRayInstance extends XRayCrawler {
+    interface Instance extends XRayCrawler.Instance {
         (
-            urlOrHtml: string,
-            scoreOrSelector: string,
-            selector?: string
-        ): XRayInvocation;
+            url: string,
+            selector: Selector
+        ): InstanceInvocation;
+        (
+            url: string,
+            scope: string,
+            selector: Selector
+        ): InstanceInvocation;
+        (
+            scope: string,
+            selector: Selector
+        ): InstanceInvocation;
     }
 
-    interface XRayInvocation {
-        (callback: XRayCallbackInvocation): void;
+    interface InstanceInvocation {
+        (callback: CallbackInvocation): void;
+        abort(): this;
+        paginate(n: number): this;
+        limit(n: number): this;
         stream(): ReadStream;
-        write(path?: string): (err: NodeJS.ErrnoException) => void;
+        then<U>(fn?: (value: any) => U | PromiseLike<U>): Bluebird<U>;
+        write(path?: string): (err: ErrnoException) => void;
     }
 }

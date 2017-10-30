@@ -1,4 +1,3 @@
-import bluebird from 'bluebird';
 import program = require('commander');
 import {Answers, prompt} from 'inquirer';
 import XRay from 'x-ray';
@@ -25,13 +24,9 @@ program
             }
         ])
         .then((answers: Answers) => {
-            osmosis
-                .get(`https://www.ultimate-guitar.com/search.php?search_type=band&order=&value=${answers.band}`)
-                .find('a.song')
-                .set('location')
-                .data((listing: any) =>
-                    console.log(listing));
-            console.log(answers);
+            const url: string = `https://www.ultimate-guitar.com/search.php?search_type=band&order=&value=${answers.band}`;
+            xRay(url, 'a.song')
+                .then<string>((value: string) => console.log(value));
         });
     });
 
