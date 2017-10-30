@@ -1,0 +1,40 @@
+{
+    "name": "guitarme",
+    "version": "1.0.0",
+    "description": "A CLI tool for downloading tabs from Ultimate Guitar",
+    "preferGlobal": true,
+    "bin": "index.ts",
+    "scripts": {
+        "foo": "ts-node ./index.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mtraynham/guitarMe.git"
+    },
+    "author": "Matt Traynham <skitch920@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mtraynham/guitarMe/issues"
+    },
+    "homepage": "https://github.com/mtraynham/guitarMe#readme",
+    "dependencies": {
+        "bluebird": "^3",
+        "chalk": "^2",
+        "commander": "^2",
+        "inquirer": "^3",
+        "preferences": "^0",
+        "x-ray": "^2",
+        "ts-node": "~3.3",
+        "typescript": "~2.5"
+    },
+    "devDependencies": {
+        "@types/accepts": "^1",
+        "@types/bluebird": "^3",
+        "@types/chalk": "^2",
+        "@types/commander": "^2",
+        "@types/inquirer": "^0",
+        "@types/node": "^8",
+        "tslint": "~5.8",
+        "tslint-microsoft-contrib": "~5.0"
+    }
+}
