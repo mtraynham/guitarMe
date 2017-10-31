@@ -1,10 +1,9 @@
 import program = require('commander');
 import {Answers, prompt} from 'inquirer';
-import XRay from 'x-ray';
+import XRay = require('x-ray');
 import * as pkg from './package.json';
 
-const xRay: XRay = XRay();
-xRay('http://google.com', 'h3').write();
+const xRay: XRay.Instance = XRay();
 
 program
     .name((<any> pkg).name)
@@ -25,8 +24,10 @@ program
         ])
         .then((answers: Answers) => {
             const url: string = `https://www.ultimate-guitar.com/search.php?search_type=band&order=&value=${answers.band}`;
-            xRay(url, 'a.song')
-                .then<string>((value: string) => console.log(value));
+            xRay(url, {
+                    title: 'a.song'
+                })
+                .then((value: any) => console.log(value));
         });
     });
 
